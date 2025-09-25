@@ -113,7 +113,13 @@ public class Database{
 
       // Create Vehicle instances and write them to "Vehicles.csv"
       System.out.println("Creating 10 random vehicles and saving them to Vehicles.csv");
-      createAndSaveRandomVehicles(10);
+       Vehicle[] vehicles = new Vehicle[10];
+
+       for (int i = 0; i < vehicles.length; i++) {
+           vehicles[i] = VehicleFactory.createRandomVehicle();  // Generates a random vehicle
+       }
+
+       ClassSaver.saveObjects(vehicles);
 
 
       // Initialize the database connection
@@ -128,12 +134,28 @@ public class Database{
 
 
       // Read the 10 vehicles from "Vehicles.csv" and insert them into the database
-      readVehiclesAndInsertIntoDB();
+      List<Vehicle> loadedVehicles = ObjectLoader.loadObjectsFromFile(new File("Vehicles.csv"), Vehicle.class);
 
+      for (Vehicle v : loadedVehicles) {
+         String tableName = v.getClass().getSimpleName() + "s";
+         String columnInfo = DatabaseUtils.buildColumnNames(v.getClass());
+         String values = "";
+         for (Field field : v.getClass().getDeclaredFields()) {
+            values += DatabaseUtils.convertFieldToSQL(field, v) + ", ";
+         }
+
+         // Remove the trailing comma and space
+            if (values.length() > 0) {
+               values = values.substring(0, values.length() - 2);
+            }
+
+         command = QueryBuilder.buildInsertQuery(tableName, columnInfo, values);
+         myDatabase.executeCommand(command);
+      }
 
       // Query the database to retrieve and print all vehicles
       command = QueryBuilder.buildSelectQuery("Vehicles", "*", "");
-      ResultSet result = stat.executeQuery(command);
+      ResultSet result = myDatabase.executeCommand(command);
       System.out.println("Vehicles in database:\n" + DatabaseUtils.printResultSet(result));
 
 
@@ -168,35 +190,12 @@ public class Database{
 
    //================== Helper Functions for Main ===================//
    public static void createAndSaveRandomVehicles(int numVehicles) {
-       Vehicle[] vehicles = new Vehicle[numVehicles];
-
-       for (int i = 0; i < vehicles.length; i++) {
-           vehicles[i] = VehicleFactory.createRandomVehicle();  // Generates a random vehicle
-       }
-
-       ClassSaver.saveObjects(vehicles);
+      
    }
 
 
    public static void readVehiclesAndInsertIntoDB(){
-      List<Vehicle> loadedVehicles = ObjectLoader.loadObjectsFromFile(new File("Vehicles.csv"), Vehicle.class);
-
-      for (Vehicle v : loadedVehicles) {
-         String tableName = v.getClass().getSimpleName() + "s";
-         String columnInfo = DatabaseUtils.buildColumnNames(v.getClass());
-         String values = "";
-         for (Field field : v.getClass().getDeclaredFields()) {
-            values += DatabaseUtils.convertFieldToSQL(field, v) + ", ";
-         }
-
-         // Remove the trailing comma and space
-            if (values.length() > 0) {
-               values = values.substring(0, values.length() - 2);
-            }
-
-         command = QueryBuilder.buildInsertQuery(tableName, columnInfo, values);
-         myDatabase.executeCommand(command);
-      }
+      
    }
 }
 
