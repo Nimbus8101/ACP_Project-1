@@ -113,19 +113,14 @@ public class Database{
 
       // Create Vehicle instances and write them to "Vehicles.csv"
       System.out.println("Creating 10 random vehicles and saving them to Vehicles.csv");
-      Vehicle[] vehicles = new Vehicle[10];
+      createAndSaveRandomVehicles(10);
 
-      for (int i = 0; i < vehicles.length; i++) {
-         vehicles[i] = VehicleFactory.createRandomVehicle();  // Generates a random vehicle
-      }
-
-      ClassSaver.saveObjects(vehicles);
 
       // Initialize the database connection
       Database myDatabase = new Database("database.properties");
       System.out.println("Connected to database successfully\n");
 
-      
+
       // Create a SQL command to create the database table, then issue that command
       Class<?> cls = vehicles[0].getClass();
       String command = QueryBuilder.buildCreateTableQuery("Vehicles", DatabaseUtils.buildColumnInfo(cls));
@@ -133,24 +128,7 @@ public class Database{
 
 
       // Read the 10 vehicles from "Vehicles.csv" and insert them into the database
-      List<Vehicle> loadedVehicles = ObjectLoader.loadObjectsFromFile(new File("Vehicles.csv"), Vehicle.class);
-
-      for (Vehicle v : loadedVehicles) {
-         String tableName = cls.getSimpleName() + "s";
-         String columnInfo = DatabaseUtils.buildColumnNames(cls);
-         String values = "";
-         for (Field field : cls.getDeclaredFields()) {
-            values += DatabaseUtils.convertFieldToSQL(field, v) + ", ";
-         }
-
-         // Remove the trailing comma and space
-            if (values.length() > 0) {
-               values = values.substring(0, values.length() - 2);
-            }
-
-         command = QueryBuilder.buildInsertQuery(tableName, columnInfo, values);
-         myDatabase.executeCommand(command);
-      }
+      readVehiclesAndInsertIntoDB();
 
 
       // Query the database to retrieve and print all vehicles
@@ -186,4 +164,39 @@ public class Database{
       myDatabase.dbLog.close();
       System.out.println("Dropped Table Vehicles, closed connection and ending program");
    }
+
+
+   //================== Helper Functions for Main ===================//
+   public static void createAndSaveRandomVehicles(int numVehicles) {
+       Vehicle[] vehicles = new Vehicle[numVehicles];
+
+       for (int i = 0; i < vehicles.length; i++) {
+           vehicles[i] = VehicleFactory.createRandomVehicle();  // Generates a random vehicle
+       }
+
+       ClassSaver.saveObjects(vehicles);
+   }
+
+
+   public static void readVehiclesAndInsertIntoDB(){
+      List<Vehicle> loadedVehicles = ObjectLoader.loadObjectsFromFile(new File("Vehicles.csv"), Vehicle.class);
+
+      for (Vehicle v : loadedVehicles) {
+         String tableName = v.getClass().getSimpleName() + "s";
+         String columnInfo = DatabaseUtils.buildColumnNames(v.getClass());
+         String values = "";
+         for (Field field : v.getClass().getDeclaredFields()) {
+            values += DatabaseUtils.convertFieldToSQL(field, v) + ", ";
+         }
+
+         // Remove the trailing comma and space
+            if (values.length() > 0) {
+               values = values.substring(0, values.length() - 2);
+            }
+
+         command = QueryBuilder.buildInsertQuery(tableName, columnInfo, values);
+         myDatabase.executeCommand(command);
+      }
+   }
 }
+
