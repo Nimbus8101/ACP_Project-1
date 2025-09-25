@@ -1,35 +1,38 @@
 Executing command: CREATE TABLE Vehicles (make VARCHAR(10), size VARCHAR(12), weight DOUBLE, engineSize DOUBLE)
 Command executed successfully (update), affected rows: 0
 
-Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('TOYOTA', 'FULL_SIZE', 4425.89694096044, 166.18302308245325)
+Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('FORD', 'FULL_SIZE', 3380.1859513534887, 189.59493652958474)
 Command executed successfully (update), affected rows: 1
 
-Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('FORD', 'INTERMEDIATE', 2190.289872874687, 149.68313031054365)
+Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('TOYOTA', 'FULL_SIZE', 2634.628507862776, 160.1552988312664)
 Command executed successfully (update), affected rows: 1
 
-Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('TOYOTA', 'COMPACT', 1570.0799233876508, 152.92138050707524)
+Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('FORD', 'INTERMEDIATE', 2409.823714858382, 155.78216240317948)
 Command executed successfully (update), affected rows: 1
 
-Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('TOYOTA', 'FULL_SIZE', 3388.3255910602766, 176.40644379421974)
+Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('TOYOTA', 'FULL_SIZE', 2675.982035662928, 144.34178354307474)
 Command executed successfully (update), affected rows: 1
 
-Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('CHEVY', 'FULL_SIZE', 3883.440352742686, 155.47510188735225)
+Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('NISSAN', 'INTERMEDIATE', 2398.249126938508, 133.99642496450878)
 Command executed successfully (update), affected rows: 1
 
-Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('FORD', 'INTERMEDIATE', 2036.2221992594302, 182.93153557336075)
+Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('FORD', 'COMPACT', 1972.3760966832788, 106.6461091219072)
 Command executed successfully (update), affected rows: 1
 
-Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('HYUNDAI', 'FULL_SIZE', 2899.5156007369105, 160.02454833186948)
+Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('FORD', 'FULL_SIZE', 3464.472770889852, 108.09920921250045)
 Command executed successfully (update), affected rows: 1
 
-Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('TOYOTA', 'INTERMEDIATE', 2205.4778424548886, 131.96697999567056)
+Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('TOYOTA', 'INTERMEDIATE', 2231.869923705081, 107.2429924576595)
 Command executed successfully (update), affected rows: 1
 
-Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('FORD', 'INTERMEDIATE', 2056.103606586132, 199.45543323461578)
+Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('CHEVY', 'INTERMEDIATE', 2094.6090122464648, 112.7547743815062)
 Command executed successfully (update), affected rows: 1
 
-Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('TOYOTA', 'FULL_SIZE', 2657.8509446512107, 136.02733345274387)
+Executing command: INSERT INTO Vehicles (make, size, weight, engineSize) VALUES ('FORD', 'COMPACT', 1846.3822095303867, 127.78886908519402)
 Command executed successfully (update), affected rows: 1
+
+Executing command: SELECT * FROM Vehicles
+Command executed successfully (query)
 
 Executing command: DROP TABLE Vehicles
 Command executed successfully (update), affected rows: 0

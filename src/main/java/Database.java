@@ -113,13 +113,13 @@ public class Database{
 
       // Create Vehicle instances and write them to "Vehicles.csv"
       System.out.println("Creating 10 random vehicles and saving them to Vehicles.csv");
-       Vehicle[] vehicles = new Vehicle[10];
+      Vehicle[] vehicles = new Vehicle[10];
 
-       for (int i = 0; i < vehicles.length; i++) {
-           vehicles[i] = VehicleFactory.createRandomVehicle();  // Generates a random vehicle
-       }
+      for (int i = 0; i < vehicles.length; i++) {
+         vehicles[i] = VehicleFactory.createRandomVehicle();  // Generates a random vehicle
+      }
 
-       ClassSaver.saveObjects(vehicles);
+      ClassSaver.saveObjects(vehicles);
 
 
       // Initialize the database connection
@@ -185,17 +185,6 @@ public class Database{
       myDatabase.closeConnections();
       myDatabase.dbLog.close();
       System.out.println("Dropped Table Vehicles, closed connection and ending program");
-   }
-
-
-   //================== Helper Functions for Main ===================//
-   public static void createAndSaveRandomVehicles(int numVehicles) {
-      
-   }
-
-
-   public static void readVehiclesAndInsertIntoDB(){
-      
    }
 }
 
