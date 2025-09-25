@@ -63,6 +63,13 @@ public class DatabaseUtils {
         }
     }
 
+    /**
+     * Converts a field's value to its SQL representation.
+     * @param field The field to convert.
+     * @param obj The object containing the field.
+     * @param <T> The type of the object.
+     * @return The SQL representation of the field's value as a string.
+     */
     public static <T> String convertFieldToSQL(Field field, T obj) {
         try {
             field.setAccessible(true);
@@ -101,10 +108,10 @@ public class DatabaseUtils {
 
 
     /**
-        * Prints the contents of a ResultSet.
-        * @param resultSet The ResultSet to print.
-        * @return A string representation of the ResultSet contents.
-        */
+    * Prints the contents of a ResultSet.
+    * @param resultSet The ResultSet to print.
+    * @return A string representation of the ResultSet contents.
+    */
     public static String printResultSet(ResultSet resultSet){
         StringBuilder sb = new StringBuilder();
         try {

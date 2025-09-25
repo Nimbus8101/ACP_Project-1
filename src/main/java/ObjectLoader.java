@@ -5,7 +5,23 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * ObjectLoader.java
+ * Utility class for loading objects from a CSV file.
+ * Functionality:
+ * - Load objects of a specified class from a CSV file.
+ * 
+ * @author Elijah Reyna
+ * Last Edited 9/25/25
+ */
 public class ObjectLoader {
+    /**
+     * Loads objects of a specified class from a CSV file.
+     * @param file The CSV file to load objects from.
+     * @param cls The class of the objects to load.
+     * @return A list of loaded objects.
+     */
     public static <T> List<T> loadObjectsFromFile(File file, Class<T> cls) {
         List<T> objects = new ArrayList<>();
 
@@ -36,6 +52,12 @@ public class ObjectLoader {
         return objects;
     }
 
+    /**
+     * Converts a SQL string value to the appropriate Java type based on the field's type.
+     * @param type The type of the field.
+     * @param string The SQL string value.
+     * @return The converted value.
+     */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     private static Object convertSQLToValue(Class<?> type, String string) {
         if (type == int.class || type == Integer.class) {
